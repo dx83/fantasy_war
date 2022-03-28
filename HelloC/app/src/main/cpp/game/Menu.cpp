@@ -308,7 +308,7 @@ bool keyPopMenu(iKeyStat stat, iPoint point)
         case iKeyStatBegan://case iKeyStatMoved:
             for (i = 0; i < 3; i++)
             {
-                if (containPoint(point, imgMenuBtn[i]->touchRect(pop->closePoint)))//, iSizeMake(80, 40))))//터치크기 늘리기
+                if (containPoint(point, imgMenuBtn[i]->touchRect(pop->closePoint)))//, iSizeMake(80, 40))))//터치 영역 늘리기
                 {
                     j = i;
                     break;
@@ -326,7 +326,7 @@ bool keyPopMenu(iKeyStat stat, iPoint point)
             i = pop->selected;
             if( i==-1) break;
 
-            if (!containPoint(point, imgMenuBtn[i]->touchRect(pop->closePoint)))//, iSizeMake(80, 40)))==false)//터치크기 늘리기
+            if (!containPoint(point, imgMenuBtn[i]->touchRect(pop->closePoint)))//, iSizeMake(80, 40)))==false)//터치 영역 늘리기
                 pop->selected = -1;
             break;
 
@@ -336,16 +336,19 @@ bool keyPopMenu(iKeyStat stat, iPoint point)
 
             if (pop->selected == 0)
             {
+                playSfxSound(0);
                 showPopMenu(false);
                 setLoading(gs_proc, freeMenu, loadProc, 2);
             }
             else if (pop->selected == 1)
             {
+                playSfxSound(0);
                 showPopMenu(false);
                 setLoading(gs_intro, freeMenu, loadIntro);
             }
             else// if (popMenu->selected == 2)
             {
+                playSfxSound(0);
                 showPopYesNo(true, 0);
             }
 

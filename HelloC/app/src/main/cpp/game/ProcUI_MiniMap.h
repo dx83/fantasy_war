@@ -29,6 +29,7 @@ struct MiniMap
 	// minimap(hide->open) reverse open
 	float r, p;	// r 열리는 동안 시간 비율, p 미니맵 초기위치
 	bool bEnd;	// 팝업창 열림 종료
+	bool miniOn;// 미니맵 완전히 닿힐 때 선택박스 끄기
 };
 
 void createMiniMap();

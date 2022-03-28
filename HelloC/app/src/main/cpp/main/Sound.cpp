@@ -1,14 +1,19 @@
 #include "Sound.h"
 
+#define _bgmMAX 2
+#define _sfxMAX 3
+//#define SOUNDON
+
 void loadSound()
 {
-	const char* bgm[2] =
+#if 0
+	const char* bgm[_bgmMAX] =
 	{
 			"wav/00maintitle.wav",  //0
 			"wav/01ingame.wav"      //1
 	};
-
-	const char* sfx[3] =
+#endif
+	const char* sfx[_sfxMAX] =
 	{
 			"wav/02menu_btn.wav",       //0
 			"wav/03regimentClick.wav",  //1
@@ -18,15 +23,16 @@ void loadSound()
 	JNIEnv* env = getEnv();
 
 	//bgm
-	for(int i = 0; i < 2; i++)
+#if 0
+	for(int i = 0; i < _bgmMAX; i++)
 	{
 		jstring path = javaNewStringChar(env, bgm[i]);
 		ndkLoadBgmSound(path);
 		env->DeleteLocalRef(path);
 	}
-
+#endif
 	//sfx
-	for(int i = 0; i < 3; i++)
+	for(int i = 0; i < _sfxMAX; i++)
 	{
 		jstring path = javaNewStringChar(env, sfx[i]);
 		ndkLoadSfxSound(path);
@@ -41,7 +47,9 @@ void playBgmSound(int index)
 
 void playSfxSound(int index)
 {
+#ifdef SOUNDON
 	ndkPlaySfxSound(index);
+#endif
 }
 
 void stopBgmSound(int index)
@@ -68,3 +76,4 @@ void pauseBgmSound(bool pause)
 {
 	ndkPauseBgmSound(pause);
 }
+

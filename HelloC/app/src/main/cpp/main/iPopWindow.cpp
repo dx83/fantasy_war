@@ -253,27 +253,33 @@ bool keyPopPause(iKeyStat stat, iPoint point)
 
             if (pop->selected == 0)
             {
+                playSfxSound(0);
                 showPopPause(false);
                 pOption->pop->selected = 0;
             }
             else if (pop->selected == 1)
             {
+                playSfxSound(0);
                 showPopDesc(true);
             }
             else if (pop->selected == 2)
             {
+                playSfxSound(0);
                 showPopYesNo(true, 1);
             }
             else if (pop->selected == 3)
             {
+                playSfxSound(0);
                 showPopYesNo(true, 0);
             }
             else if (pop->selected == 4)
             {
+                playSfxSound(0);
                 fogOnOff();
             }
             else if (pop->selected == 5)
             {
+                playSfxSound(0);
                 showPopVolume(true);
             }
 
@@ -439,6 +445,7 @@ bool keyPopYesNo(iKeyStat stat, iPoint point)
 
         if(i == 0)
         {
+            playSfxSound(0);
             showPopYesNo(false, popMethod);
 
             if(popMethod == 0)// Exit
@@ -457,7 +464,10 @@ bool keyPopYesNo(iKeyStat stat, iPoint point)
             }
         }
         else if(i == 1)
+        {
+            playSfxSound(0);
             showPopYesNo(false, popMethod);
+        }
 
         break;
     }
@@ -717,16 +727,21 @@ bool keyPopDesc(iKeyStat stat, iPoint point)
         case iKeyStatEnded:
         {
             if ( desc->xButton )
+            {
+                playSfxSound(0);
                 showPopDesc(false);
+            }
 
             if ( desc->bRight )
             {
+                playSfxSound(0);
                 desc->curr--;
                 if ( desc->curr < 0)
                     desc->curr = 4;
             }
             if (desc->bLeft )
             {
+                playSfxSound(0);
                 desc->curr++;
                 if ( desc->curr > 4 )
                     desc->curr = 0;

@@ -468,6 +468,15 @@ bool keyRegimentAction(iKeyStat stat, iPoint point)
 
                     if ( th->setTex == 2 ) // 이동 구현
                     {
+#if 0//issue sound
+                        playSfxSound(2);
+                        JNIEnv* env = getEnv();
+                        jclass cls = env->FindClass("java/lang/Thread");
+                        jmethodID mid = env->GetStaticMethodID(cls, "sleep", "(J)V");
+                        jlong sleepTime = 1000;
+                        env->CallStaticVoidMethod(cls, mid, sleepTime);
+                        env->DeleteLocalRef(cls);
+#endif
                         setRegimentIndex( currentIndex, getRegimentIndex(_dc->focusIdx) );
                         setRegimentIndex( _dc->focusIdx, -1 );
 

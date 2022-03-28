@@ -64,6 +64,7 @@ void loadProc()
         drawMiniMap,
         drawCommander,
     };
+#ifdef _NONE
     proc->draw = new iArray(NULL);
 
     for (int i = 0; i < DRAWMAX; i++)
@@ -71,6 +72,9 @@ void loadProc()
         proc->draw->addObject((void*)draw[i]);
         proc->idx[i] = i;
     }
+#else
+
+#endif
     //toMenu = false;
     //loge("loadProc END");
 }
@@ -172,42 +176,23 @@ void keyProc(iKeyStat stat, iPoint point)
         break;
     }
 #endif
-    switch(proc->idx[0])
+
+    for (int i = 0; i < DRAWMAX; i++)
     {
-        case 0:
-            if (keyTileInfo(stat, point))   return;
-            break;
-        case 1:
-            if (keyMiniMap(stat, point))    return;
-            break;
-        case 2:
-            if (keyCommander(stat, point))  return;
-            break;
+        switch(proc->idx[i])
+        {
+            case 0:
+                if (keyTileInfo(stat, point))   return;
+                break;
+            case 1:
+                if (keyMiniMap(stat, point))    return;
+                break;
+            case 2:
+                if (keyCommander(stat, point))  return;
+                break;
+        }
     }
-    switch(proc->idx[1])
-    {
-        case 0:
-            if (keyTileInfo(stat, point))   return;
-            break;
-        case 1:
-            if (keyMiniMap(stat, point))    return;
-            break;
-        case 2:
-            if (keyCommander(stat, point))  return;
-            break;
-    }
-    switch(proc->idx[2])
-    {
-        case 0:
-            if (keyTileInfo(stat, point))   return;
-            break;
-        case 1:
-            if (keyMiniMap(stat, point))    return;
-            break;
-        case 2:
-            if (keyCommander(stat, point))  return;
-            break;
-    }
+
 #if 0
     if (keyHexMap(stat, point))
         return;
@@ -311,8 +296,9 @@ bool keyPopOption(iKeyStat stat, iPoint point)
         case iKeyStatEnded:
             if (pOption->pop->selected)
             {
-                cmBmoveBtnOff();//move 풀기
-                currentIndex = _dc->focusIdx;
+                playSfxSound(0);
+                //cmBmoveBtnOff();//move 풀기
+                //currentIndex = _dc->focusIdx;
                 showPopPause(true);
             }
             break;

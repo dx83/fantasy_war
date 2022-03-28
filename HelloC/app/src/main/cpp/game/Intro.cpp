@@ -150,7 +150,10 @@ void keyIntro(iKeyStat stat, iPoint point)
 
     case iKeyStatEnded:
         if (it->onClick)
+        {
+            playSfxSound(0);
             setLoading(gs_menu, freeIntro, loadMenu);
+        }
         it->onClick = false;
         break;
     }

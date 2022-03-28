@@ -37,7 +37,6 @@ import java.nio.FloatBuffer;
 import javax.microedition.khronos.egl.EGLConfig;
 import javax.microedition.khronos.opengles.GL10;
 
-import win.gatewalker.lib.Audio;
 import win.gatewalker.lib.Native;
 
 /*
@@ -295,8 +294,6 @@ class Render implements GLSurfaceView.Renderer    // 그리기
         String ioPath = context.getFilesDir().getAbsolutePath();
 
         Native.loadGame(apkFilePath, ioPath);
-
-        //new Audio();
     }
 
     @Override
