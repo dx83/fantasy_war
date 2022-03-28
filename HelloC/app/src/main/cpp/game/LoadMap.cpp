@@ -499,8 +499,10 @@ bool keyHexMap(iKeyStat stat, iPoint point)
                 _dc->focusIdx = -1;
 
             int armyIdx = lm->hexs[currentIndex].regimentIdx;
-            if (armyIdx != -1)
+            if (armyIdx != -1) {
+                playSfxSound(1);
                 showCommander(true);
+            }
             else if (_dc->focusIdx == -1)
                 showCommander(false);
         }

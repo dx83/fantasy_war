@@ -167,8 +167,9 @@ void volumeControl(iPoint point)
         if (musicPs > 200)      musicPs = 200;
         else if (musicPs < 0)   musicPs = 0;
 
-        for (int i = 0; i < 2; i++)
-            audioVolume(musicPs / 200, i);
+        //for (int i = 0; i < 2; i++)
+        //    audioVolume(musicPs / 200, i);
+        //volumeBgmSound(musicPs / 200);
     }
     else if (iv->bEffect)
     {
@@ -176,8 +177,9 @@ void volumeControl(iPoint point)
         if (effectPs > 200)      effectPs = 200;
         else if (effectPs < 0)   effectPs = 0;
 
-        for (int i = 0; i < 3; i++)
-            audioVolume(effectPs / 200, i + 2);
+        //for (int i = 0; i < 3; i++)
+        //    audioVolume(effectPs / 200, i + 2);
+        volumeSfxSound(effectPs / 200);
     }
 }
 
@@ -224,13 +226,15 @@ bool keyPopVolume(iKeyStat stat, iPoint point)
         {
             if(iv->bWheel)
             {
-                audioPlay(2);
+                //audioPlay(2);
+                playSfxSound(0);
                 iv->volumes->bShow ? showPopVolume(false) : showPopVolume(true);
             }
 
             if (iv->volumes->bShow && containPoint(point, iv->xBtn))
             {
-                audioPlay(2);
+                //audioPlay(2);
+                playSfxSound(0);
                 showPopVolume(false);
             }
             iv->volumes->selected = 0;

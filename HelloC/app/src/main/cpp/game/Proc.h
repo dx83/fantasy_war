@@ -13,7 +13,11 @@ typedef void (*Method_Draw)(float dt);
 #define DRAWMAX 3
 struct PROC
 {
+#ifdef _NONE
     iArray* draw;
+#else
+    void* draw;
+#endif
     int idx[DRAWMAX];
 };
 

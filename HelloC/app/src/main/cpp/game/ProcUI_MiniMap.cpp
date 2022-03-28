@@ -13,6 +13,7 @@ iPopup** miniMap;
 void drawPopTriBtn(float dt);
 void drawPopMiniScreen(iPopup* popup, float dt, float rate);
 void miniMapOpenEvent(iPopup* popup, float dt, float rate);
+void miniMapCloseEvent(iPopup* popup, float dt, float rate);
 
 void createMiniMap()
 {
@@ -39,6 +40,7 @@ void createMiniMap()
 	mm->r = 0.f;
 	mm->p = 0.f;
 	mm->bEnd = false;
+	mm->miniOn = true;
 
 	// popup miniMap
     miniMap = new iPopup*[2];
@@ -111,6 +113,7 @@ void createMiniMap()
 	pop->openPoint = iPointMake(0, -225);
 	pop->closePoint = iPointMake(0, 0);
 	pop->methodOpen = miniMapOpenEvent;
+	pop->methodClose = miniMapCloseEvent;
 	miniMap[1] = pop;
 
 	resetRGBA();
@@ -118,7 +121,6 @@ void createMiniMap()
 
 void freeMiniMap()
 {
-    //freeImage(mm->tex);
 	delete mm;
 
 	for (int i = 0; i < 2; i++)
@@ -182,28 +184,32 @@ void drawPopMiniScreen(iPopup* popup, float dt, float rate)
 	pop->paint(dt);//minimap
 	texFboForiPopup = texBackup;
 #endif
-	drawChooseBox(pop);
+	if(mm->miniOn)
+		drawChooseBox(pop);
 }
 
 void miniMapOpenEvent(iPopup* popup, float dt, float rate)
 {
-	if (popup->stat == iPopupOpen)
+	mm->miniOn = true;
+	if(!mm->bEnd)		// 초기값 한번만 입력
+		mm->p = devSize.height - mm->offPop.y;
+	if (mm->p < 225)
 	{
-		if(!mm->bEnd)		// 초기값 한번만 입력
-			mm->p = devSize.height - mm->offPop.y;
-		if (mm->p < 225)
-		{
-			mm->bEnd = true;
-			mm->r = rate;
-		}
-		else
-			mm->r = 0.0f;	// 끝나면 비율 초기화
+		mm->bEnd = true;
+		mm->r = rate;
 	}
+	else
+		mm->r = 0.0f;	// 끝나면 비율 초기화
+}
+
+void miniMapCloseEvent(iPopup* popup, float dt, float rate)
+{
+	mm->miniOn = false;
 }
 
 void drawMiniMap(float dt)
 {
-	if (mm->bEnd && mm->p < 225)
+	if (mm->bEnd && mm->p < 225)// 화면 하단에서 미니맵 타이틀이 역으로 올라가게...
 	{
 		int t = 225 - mm->p;	// 역으로 올라갈 거리
 		if (mm->r > 0.8f)		// 끝날때즈음 위치 정위치

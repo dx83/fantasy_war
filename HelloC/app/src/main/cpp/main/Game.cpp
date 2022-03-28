@@ -8,32 +8,10 @@
 
 #include "Test.h"
 
-//#define LOWDISK
 void loadGame()
 {
-#if 0
-    AudioInfo ai[5] =
-	{
-#ifndef LOWDISK
-		{"assets/wav/00maintitle.wav", true, 1.0f},
-		{"assets/wav/01ingame.wav", true, 1.0f},
-		{"assets/wav/02menu_btn.wav", false, 1.0f},
-		{"assets/wav/03regimentClick.wav", false, 1.0f},
-		{"assets/wav/04foot.wav", false, 1.0f},
-#else
-		{"assets/wav/02menu_btn.wav", false, 1.0f},
-		{"assets/wav/03regimentClick.wav", false, 1.0f},
-		{"assets/wav/02menu_btn.wav", false, 1.0f},
-		{"assets/wav/03regimentClick.wav", false, 1.0f},
-		{"assets/wav/04foot.wav", false, 1.0f},
-#endif
-	};
-	loadAudio(ai, 5);
-	audioVolume(1.0f, 1.0f, 0);
-	audioPlay(0);
-#endif
-    //loadSound();
 	setStringName("assets/font/BMJUA_ttf.ttf");
+    //loadSound();
 
 #if 1// 스트링 로딩
 	gameState = gs_delay;
@@ -62,7 +40,6 @@ void freeGame()
 
 	case gs_test: freeTest();
 	}
-	//freeAudio();
 }
 
 void drawGame(float dt)

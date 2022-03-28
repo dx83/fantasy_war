@@ -8,10 +8,7 @@ import android.util.Log;
 public class SoundP implements SoundPool.OnLoadCompleteListener
 {
     @Override
-    public void onLoadComplete(SoundPool soundPool, int sampleId, int status)
-    {
-
-    }
+    public void onLoadComplete(SoundPool soundPool, int sampleId, int status) { }
 
     SoundPool[] p;
 
@@ -46,15 +43,14 @@ public class SoundP implements SoundPool.OnLoadCompleteListener
         sfxVolume = 1.0f;
     }
 
-    void bgmLoad(String path)
+    void bgmLoad(String path)//길이(용량)가 긴 음원은 작동하지 않음
     {
         try{
             AssetFileDescriptor afd = App.app.getAssets().openFd(path);
             bgmId[bgmNum] = p[0].load(afd, 0);
             afd.close();
             bgmNum++;
-
-        } catch (Exception e){};
+        } catch (Exception e){ Log.e("ssm", path); };
     }
 
     void sfxLoad(String path)
@@ -99,11 +95,7 @@ public class SoundP implements SoundPool.OnLoadCompleteListener
         bgmVolume = volume;
     }
 
-    void sfxVolume(float volume)
-    {
-        sfxVolume = volume;
-
-    }
+    void sfxVolume(float volume) { sfxVolume = volume; }
 
     void bgmPause(boolean pause)
     {
